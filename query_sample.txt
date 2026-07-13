@@ -1,0 +1,184 @@
+-- USERS
+
+CREATE TABLE users (
+
+    id SERIAL PRIMARY KEY,
+
+    name VARCHAR(100) NOT NULL,
+
+    email VARCHAR(100) UNIQUE NOT NULL,
+
+    password VARCHAR(100) NOT NULL
+
+);
+
+-- ASSIGNMENTS
+
+CREATE TABLE assignments (
+
+    id SERIAL PRIMARY KEY,
+
+    user_id INTEGER NOT NULL,
+
+    title VARCHAR(200) NOT NULL,
+
+    subject VARCHAR(100),
+
+    due_date DATE,
+
+    status VARCHAR(30) DEFAULT 'pending',
+
+    notes TEXT,
+
+    CONSTRAINT fk_assignment_user
+        FOREIGN KEY(user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
+
+);
+
+-- ATTENDANCE
+
+CREATE TABLE attendance (
+
+    id SERIAL PRIMARY KEY,
+
+    user_id INTEGER NOT NULL,
+
+    subject VARCHAR(100) NOT NULL,
+
+    total_classes INTEGER DEFAULT 0,
+
+    attended_classes INTEGER DEFAULT 0,
+
+    required_percentage REAL DEFAULT 75,
+
+    CONSTRAINT fk_attendance_user
+        FOREIGN KEY(user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT attendance_unique
+        UNIQUE(user_id, subject)
+
+);
+
+-- TIMETABLE
+
+CREATE TABLE timetable_slots (
+
+    id SERIAL PRIMARY KEY,
+
+    user_id INTEGER NOT NULL,
+
+    day VARCHAR(20) NOT NULL,
+
+    start_time TIME NOT NULL,
+
+    end_time TIME NOT NULL,
+
+    subject VARCHAR(100) NOT NULL,
+
+    location VARCHAR(100),
+
+    CONSTRAINT fk_timetable_user
+        FOREIGN KEY(user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
+
+);
+
+-- EXAMS
+
+CREATE TABLE exams (
+
+    id SERIAL PRIMARY KEY,
+
+    user_id INTEGER NOT NULL,
+
+    subject VARCHAR(100) NOT NULL,
+
+    exam_date DATE NOT NULL,
+
+    priority VARCHAR(20) DEFAULT 'medium',
+
+    CONSTRAINT fk_exam_user
+        FOREIGN KEY(user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
+
+);
+
+-- COURSES
+
+CREATE TABLE courses (
+
+    id SERIAL PRIMARY KEY,
+
+    user_id INTEGER NOT NULL,
+
+    semester VARCHAR(100) NOT NULL,
+
+    course_name VARCHAR(100) NOT NULL,
+
+    credit_hours REAL NOT NULL,
+
+    grade_point REAL NOT NULL,
+
+    CONSTRAINT fk_course_user
+        FOREIGN KEY(user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
+
+);
+
+-- TIMER SESSIONS
+
+CREATE TABLE timer_sessions (
+
+    id SERIAL PRIMARY KEY,
+
+    user_id INTEGER NOT NULL,
+
+    session_type VARCHAR(20) DEFAULT 'work',
+
+    duration_minutes INTEGER NOT NULL,
+
+    completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_timer_user
+        FOREIGN KEY(user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
+
+);
+
+-- INDEXES
+
+CREATE INDEX idx_assignment_user
+ON assignments(user_id);
+
+CREATE INDEX idx_attendance_user
+ON attendance(user_id);
+
+CREATE INDEX idx_timetable_user
+ON timetable_slots(user_id);
+
+CREATE INDEX idx_exam_user
+ON exams(user_id);
+
+CREATE INDEX idx_course_user
+ON courses(user_id);
+
+CREATE INDEX idx_timer_user
+ON timer_sessions(user_id);
+
+-- SAMPLE USER
+
+INSERT INTO users(name,email,password)
+VALUES
+(
+    'Admin',
+    'admin@gmail.com',
+    'admin123'
+);
