@@ -31,7 +31,8 @@ Student Productivity Hub — a minimal, approachable web application that helps 
 ## Database
 
 - PostgreSQL
-
+# Install requirements
+-pip install -r requirements.txt
 # Database Tables
 
 - users
