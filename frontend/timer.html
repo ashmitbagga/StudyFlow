@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Timer - Student Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <div class="container">
+    <h1 class="page-title">Timer</h1>
+    <p class="page-subtitle">Custom work/rest cycles and session history.</p>
+
+    <div class="section-box">
+      <h2>Set Durations</h2>
+      <div class="inline-form">
+        <div class="field">
+          <label for="work-minutes">Work Minutes</label>
+          <input type="number" id="work-minutes" min="1" value="25">
+        </div>
+        <div class="field">
+          <label for="break-minutes">Break Minutes</label>
+          <input type="number" id="break-minutes" min="1" value="5">
+        </div>
+      </div>
+    </div>
+
+    <div class="section-box">
+      <h2 id="timer-mode-label">Work Session</h2>
+      <div class="timer-display" id="timer-display">25:00</div>
+      <div class="timer-controls">
+        <button onclick="startTimer()">Start</button>
+        <button class="secondary" onclick="pauseTimer()">Pause</button>
+        <button class="secondary" onclick="resetTimer()">Reset</button>
+      </div>
+    </div>
+
+    <div class="section-box">
+      <h2>Recent Sessions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Duration (minutes)</th>
+            <th>Completed At</th>
+          </tr>
+        </thead>
+        <tbody id="session-rows">
+          <!-- filled in by timer.js -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/timer.js"></script>
+</body>
+</html>

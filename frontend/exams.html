@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exam Countdown - Student Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <div class="container">
+    <h1 class="page-title">Exam Countdown</h1>
+    <p class="page-subtitle">Countdowns and prioritized revision plans.</p>
+
+    <div class="section-box">
+      <h2>Add Exam</h2>
+      <form id="exam-form" class="inline-form">
+        <div class="field">
+          <label for="exam-subject">Subject</label>
+          <input type="text" id="exam-subject" required placeholder="e.g. Mathematics">
+        </div>
+        <div class="field">
+          <label for="exam-date">Exam Date</label>
+          <input type="date" id="exam-date" required>
+        </div>
+        <div class="field">
+          <label for="exam-priority">Priority</label>
+          <select id="exam-priority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <div class="field">
+          <button type="submit">Add Exam</button>
+        </div>
+      </form>
+      <div class="error-message" id="exam-error"></div>
+    </div>
+
+    <div class="section-box">
+      <h2>Upcoming Exams</h2>
+      <div id="exam-list">
+        <!-- filled in by exams.js -->
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/exams.js"></script>
+</body>
+</html>

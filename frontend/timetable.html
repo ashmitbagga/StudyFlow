@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Timetable - Student Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <div class="container">
+    <h1 class="page-title">Timetable &amp; Calendar</h1>
+    <p class="page-subtitle">Your weekly class schedule.</p>
+
+    <div class="section-box">
+      <h2>Add a Class</h2>
+      <form id="slot-form" class="inline-form">
+        <div class="field">
+          <label for="slot-day">Day</label>
+          <select id="slot-day" required>
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="slot-start">Start Time</label>
+          <input type="time" id="slot-start" required>
+        </div>
+        <div class="field">
+          <label for="slot-end">End Time</label>
+          <input type="time" id="slot-end" required>
+        </div>
+        <div class="field">
+          <label for="slot-subject">Subject</label>
+          <input type="text" id="slot-subject" placeholder="e.g. Calculus I" required>
+        </div>
+        <div class="field">
+          <label for="slot-location">Room / Location</label>
+          <input type="text" id="slot-location" placeholder="e.g. Room 204">
+        </div>
+        <div class="field">
+          <button type="submit">Add Class</button>
+        </div>
+      </form>
+      <div class="error-message" id="slot-error"></div>
+    </div>
+
+    <div class="section-box">
+      <h2>Weekly View</h2>
+      <div class="timetable-grid" id="timetable-grid">
+        <!-- filled in by timetable.js -->
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/timetable.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GPA / CGPA Calculator - Student Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <div class="container">
+    <h1 class="page-title">GPA / CGPA Calculator</h1>
+    <p class="page-subtitle">Course-grade inputs with semester and cumulative views.</p>
+
+    <div class="gpa-result">
+      <div class="text-muted">Cumulative GPA (CGPA)</div>
+      <div class="cgpa-number" id="cgpa-value">--</div>
+      <div class="text-muted" id="total-credits-text"></div>
+    </div>
+
+    <div class="section-box">
+      <h2>Add Course</h2>
+      <form id="course-form" class="inline-form">
+        <div class="field">
+          <label for="c-semester">Semester</label>
+          <input type="text" id="c-semester" required placeholder="e.g. Summer 2026">
+        </div>
+        <div class="field">
+          <label for="c-name">Course Name</label>
+          <input type="text" id="c-name" required placeholder="e.g. Intro to Programming">
+        </div>
+        <div class="field">
+          <label for="c-credits">Credit Hours</label>
+          <input type="number" id="c-credits" step="0.5" min="0" required placeholder="e.g. 3">
+        </div>
+        <div class="field">
+          <label for="c-grade">Grade Point</label>
+          <select id="c-grade" required>
+            <option value="4.0">A (4.0)</option>
+            <option value="3.7">A- (3.7)</option>
+            <option value="3.3">B+ (3.3)</option>
+            <option value="3.0">B (3.0)</option>
+            <option value="2.7">B- (2.7)</option>
+            <option value="2.3">C+ (2.3)</option>
+            <option value="2.0">C (2.0)</option>
+            <option value="1.7">C- (1.7)</option>
+            <option value="1.0">D (1.0)</option>
+            <option value="0.0">F (0.0)</option>
+          </select>
+        </div>
+        <div class="field">
+          <button type="submit">Add Course</button>
+        </div>
+      </form>
+      <div class="error-message" id="course-error"></div>
+    </div>
+
+    <div class="section-box">
+      <h2>Semester GPA</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Semester</th>
+            <th>Credit Hours</th>
+            <th>GPA</th>
+          </tr>
+        </thead>
+        <tbody id="semester-rows">
+          <!-- filled in by gpa.js -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-box">
+      <h2>All Courses</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Semester</th>
+            <th>Course</th>
+            <th>Credit Hours</th>
+            <th>Grade Point</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="course-rows">
+          <!-- filled in by gpa.js -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/gpa.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StudyFlow</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <div class="container">
+    <h1 class="page-title">Main Features</h1>
+    <p class="page-subtitle">At-a-glance widgets and quick actions.</p>
+
+    <!-- Quick summary from the backend -->
+    <div class="section-box" id="summary-box">
+      <h2>Quick Summary</h2>
+      <p id="summary-text" class="text-muted">Loading summary...</p>
+    </div>
+
+    <div class="grid">
+
+      <a class="card" href="timetable.html">
+        <div class="icon-circle">📅</div>
+        <h3>Timetable &amp; Calendar</h3>
+        <p>Visual weekly planner for your classes.</p>
+      </a>
+
+      <a class="card" href="assignments.html">
+        <div class="icon-circle">📝</div>
+        <h3>Assignment Tracker</h3>
+        <p>Deadlines, status, and reminders.</p>
+      </a>
+
+      <a class="card" href="timer.html">
+        <div class="icon-circle">⏱️</div>
+        <h3>Timer</h3>
+        <p>Custom work/rest cycles and session history.</p>
+      </a>
+
+      <a class="card" href="exams.html">
+        <div class="icon-circle">⏳</div>
+        <h3>Exam Countdown</h3>
+        <p>Countdowns for upcoming exams.</p>
+      </a>
+
+      <a class="card" href="gpa.html">
+        <div class="icon-circle">🧮</div>
+        <h3>GPA / CGPA Calculator</h3>
+        <p>Course-grade inputs with semester and cumulative views.</p>
+      </a>
+
+      <a class="card" href="search.html">
+        <div class="icon-circle">🔍</div>
+        <h3>Search</h3>
+        <p>Unified search across assignments and events.</p>
+      </a>
+
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    requireLogin();
+    buildNavbar("dashboard.html");
+
+    async function loadSummary() {
+      try {
+        const summary = await apiRequest("/dashboard-summary");
+        const parts = [];
+        parts.push(`You have <b>${summary.pending_assignments}</b> pending assignment(s).`);
+
+        if (summary.upcoming_exams.length > 0) {
+          const next = summary.upcoming_exams[0];
+          parts.push(`Next exam: <b>${next.subject}</b> on <b>${next.exam_date}</b>.`);
+        }
+
+        document.getElementById("summary-text").innerHTML = parts.join(" ");
+      } catch (err) {
+        document.getElementById("summary-text").textContent = "Could not load summary.";
+      }
+    }
+
+    loadSummary();
+  </script>
+</body>
+</html>
