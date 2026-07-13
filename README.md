@@ -56,7 +56,6 @@ DATABASE = {
 }
 ---
 
-## 6. Start Backend
+## Start Backend
 
 uvicorn main:app --reload
-
